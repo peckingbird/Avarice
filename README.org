@@ -1,0 +1,2 @@
+* Avarice
+Avarice is an online version of [[https://en.wikipedia.org/wiki/Farkle][Farkle]].
