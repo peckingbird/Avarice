@@ -17,5 +17,5 @@ public class Game {
     @Column
     private GameState gameState;
     @Column
-    private Integer turn;
+    private Integer current_turn;
 }

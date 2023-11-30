@@ -22,7 +22,7 @@ public class GameService {
         return null;
     }
 
-    public Game updateTurn(String gameId, String turnId) {
+    public Game setCurrentTurn(String gameId, String turnId) {
         return null;
     }
 

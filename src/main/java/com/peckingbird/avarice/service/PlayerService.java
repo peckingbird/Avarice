@@ -23,10 +23,6 @@ public class PlayerService {
     private GameRepository gameRepository;
 
     public List<Player> getPlayersForGame(String gameId) {
-        if (Objects.isNull(gameId)) {
-            throw new BadRequestException("Cannot get players for a null game id");
-        }
-
         List<GamePlayer> gamePlayers = gamePlayerRepository.findByGameId(gameId);
         return gamePlayers.stream()
                 .map(gamePlayer -> playerRepository.findById(gamePlayer.playerId())
@@ -37,13 +33,6 @@ public class PlayerService {
     }
 
     public void addPlayerToGame(String playerId, String gameId) {
-        if (Objects.isNull(playerId)) {
-            throw new BadRequestException("Cannot add null as a player");
-        }
-        if (Objects.isNull(gameId)) {
-            throw new BadRequestException("Cannot add player to game id of null");
-        }
-
         Player player = playerRepository.findById(playerId)
                 .orElseGet(() -> playerRepository.save(new Player(playerId)));
         Game game = gameRepository.findById(gameId)
