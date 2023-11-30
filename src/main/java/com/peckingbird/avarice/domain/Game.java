@@ -7,15 +7,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name="t_game")
-@AllArgsConstructor
-public class Game {
-    @Id
-    private String gameId;
-    @Column
-    private GameState gameState;
-    @Column
-    private Integer current_turn;
-}
+public record Game(@Id String gameId,
+                   @Column GameState gameState,
+                   @Column Integer currentTurn) { }

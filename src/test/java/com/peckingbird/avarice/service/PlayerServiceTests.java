@@ -58,7 +58,7 @@ class PlayerServiceTests {
 
         List<Player> actualPlayerList = playerService.getPlayersForGame(GamePresets.GAME_ID);
 
-        Assertions.assertEquals(actualPlayerList, expectedPlayerList,
+        Assertions.assertEquals(expectedPlayerList, actualPlayerList,
                 "Player list returned matches players in the game");
     }
 
@@ -69,7 +69,7 @@ class PlayerServiceTests {
 
         List<Player> actualPlayerList = playerService.getPlayersForGame(GamePresets.GAME_ID);
 
-        Assertions.assertEquals(actualPlayerList, List.of(),
+        Assertions.assertEquals(List.of(), actualPlayerList,
                 "Player List returned is empty");
     }
 
@@ -91,7 +91,7 @@ class PlayerServiceTests {
         Player expectedPlayer = new Player(PlayerPresets.PLAYER_ID);
         Game expectedGame = new Game(GamePresets.GAME_ID, GameState.ACTIVE, 1);
         GamePlayer expectedGamePlayer = new GamePlayer(null,
-                expectedGame.getGameId(), expectedPlayer.playerId());
+                expectedGame.gameId(), expectedPlayer.playerId());
 
         Mockito.when(playerRepository.findById(expectedPlayer.playerId()))
                 .thenReturn(Optional.of(expectedPlayer));
@@ -114,7 +114,7 @@ class PlayerServiceTests {
         Player expectedPlayer = new Player(PlayerPresets.PLAYER_ID);
         Game expectedGame = new Game(GamePresets.GAME_ID, GameState.ACTIVE, 1);
         GamePlayer expectedGamePlayer = new GamePlayer(null,
-                expectedGame.getGameId(), expectedPlayer.playerId());
+                expectedGame.gameId(), expectedPlayer.playerId());
 
         Mockito.when(playerRepository.findById(expectedPlayer.playerId()))
                 .thenReturn(Optional.of(expectedPlayer));
@@ -136,7 +136,7 @@ class PlayerServiceTests {
         Player expectedPlayer = new Player(PlayerPresets.PLAYER_ID);
         Game expectedGame = new Game(GamePresets.GAME_ID, GameState.ACTIVE, 1);
         GamePlayer expectedGamePlayer = new GamePlayer(null,
-                expectedGame.getGameId(), expectedPlayer.playerId());
+                expectedGame.gameId(), expectedPlayer.playerId());
 
         Mockito.when(playerRepository.findById(expectedPlayer.playerId()))
                 .thenReturn(Optional.empty());
@@ -159,14 +159,11 @@ class PlayerServiceTests {
     @Test
     void givenGameDoesNotExist_whenAddPlayerToGame_thenInvalidStateException() {
         Player expectedPlayer = new Player(PlayerPresets.PLAYER_ID);
-        Game expectedGame = new Game(GamePresets.GAME_ID, GameState.ACTIVE, 1);
-        GamePlayer expectedGamePlayer = new GamePlayer(null,
-                expectedGame.getGameId(), expectedPlayer.playerId());
 
         Mockito.when(playerRepository.findById(expectedPlayer.playerId()))
                 .thenReturn(Optional.of(expectedPlayer));
 
         Assertions.assertThrows(InvalidStateException.class, () ->
-                playerService.addPlayerToGame(expectedPlayer.playerId(), expectedGamePlayer.gameId()));
+                playerService.addPlayerToGame(PlayerPresets.PLAYER_ID, GamePresets.GAME_ID));
     }
 }

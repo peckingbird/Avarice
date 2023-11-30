@@ -39,11 +39,11 @@ public class PlayerService {
                 .orElseThrow(() -> new InvalidStateException(String.format("Game not found with id: %s", gameId)));
 
         Optional<GamePlayer> gamePlayer = gamePlayerRepository
-                .findByGameIdAndPlayerId(game.getGameId(), player.playerId());
+                .findByGameIdAndPlayerId(game.gameId(), player.playerId());
 
         if (gamePlayer.isEmpty()) {
             gamePlayerRepository
-                    .save(new GamePlayer(null, game.getGameId(), player.playerId()));
+                    .save(new GamePlayer(null, game.gameId(), player.playerId()));
         }
     }
 }
