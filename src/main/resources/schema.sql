@@ -1,7 +1,8 @@
 CREATE TABLE t_game(
     game_id VARCHAR(36) PRIMARY KEY,
     game_state VARCHAR(10),
-    current_turn INT
+    current_turn INT,
+    UNIQUE(current_turn)
 );
 
 CREATE TABLE t_player (
