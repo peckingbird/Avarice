@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 public class TurnService {
     private TurnRepository turnRepository;
 
-    public Turn createTurn(String playerId) {
-        return null;
-    }
+    public void createTurn(String playerId, String startingDice) { }
 
-    public Turn updateRunningScore(String turnId) {
+    public void updateRunningScore(String turnId) { }
+
+    public void updateAvailableDice(String turnId, Integer availableDice) { }
+
+    public Turn getTurn(String turnId) {
         return null;
     }
 }
